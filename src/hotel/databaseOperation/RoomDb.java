@@ -144,7 +144,7 @@ public class RoomDb {
                     PreparedStatement statement = conn.prepareStatement(updateQuery);
                     statement.setString(1, room.getRoomNo()); // Replace with the actual value for column1
                     statement.setDouble(2, room.getBedNumber()); // Replace with the actual value for the second column
-                    statement.setInt(3, id); // Use the provided id parameter
+                    statement.setInt(3, room.getRoomId()); // Use the provided id parameter
                 
                     System.out.println("Executing: " + statement.toString());
                 

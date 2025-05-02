@@ -20,13 +20,21 @@ public class FoodDb {
     
      public void insertFood(Food food) {
         try {
-            String insertFood = "insert into food('name','price') values('" + food.getName() + "'," + food.getPrice() + ")";
+            // String insertFood = "insert into food('name','price') values('" + food.getName() + "'," + food.getPrice() + ")";
+
+            // statement = conn.prepareStatement(insertFood);
+
+            // statement.execute();
+
+            // JOptionPane.showMessageDialog(null, "successfully inserted a new Food Type");
+
+            String insertFood = "INSERT INTO food(name, price) VALUES (?, ?)";
 
             statement = conn.prepareStatement(insertFood);
-
-            statement.execute();
-
-            JOptionPane.showMessageDialog(null, "successfully inserted a new Food Type");
+            statement.setString(1, food.getName());
+            statement.setDouble(2, food.getPrice());
+                    
+            statement.executeUpdate(); // Recommandé pour les INSERT
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.toString() + "\n" + "InsertQuery of Food Failed");
@@ -52,13 +60,22 @@ public class FoodDb {
 
     public void updateFood(Food food) {
         try {
-            String updateFood = "update food set name= '" + food.getName() + "', price= " + food.getPrice() + " where food_id = " + food.getFoodId();
+            // String updateFood = "update food set name= '" + food.getName() + "', price= " + food.getPrice() + " where food_id = " + food.getFoodId();
+
+            // statement = conn.prepareStatement(updateFood);
+
+            // statement.execute();
+
+            // JOptionPane.showMessageDialog(null, "successfully updateFood ");
+
+            String updateFood = "UPDATE food SET name = ?, price = ? WHERE food_id = ?";
 
             statement = conn.prepareStatement(updateFood);
+            statement.setString(1, food.getName());
+            statement.setDouble(2, food.getPrice());
+            statement.setInt(3, food.getFoodId());
 
-            statement.execute();
-
-            JOptionPane.showMessageDialog(null, "successfully updateFood ");
+            statement.executeUpdate(); // Utilise executeUpdate pour les UPDATE
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.toString() + "\n" + "updateFood of Food Failed");

@@ -15,8 +15,8 @@ public class Booking {
     
     
     private int bookingId;
-    private long checkInDateTime;
-    private long checkOutDateTime;
+    private String checkInDateTime;
+    private String checkOutDateTime;
     private String bookingType;
     private int person;
     
@@ -113,25 +113,23 @@ public class Booking {
 
     
 
-    public void setCheckOutDateTime(int checkOutDateTime) {
+    public void setCheckOutDateTime(String checkOutDateTime) {
         this.checkOutDateTime = checkOutDateTime;
     }
 
-    public long getCheckInDateTime() {
+    public String getCheckInDateTime() {
         return checkInDateTime;
     }
 
-    public void setCheckInDateTime(long checkInDateTime) {
+    public void setCheckInDateTime(String checkInDateTime) {
         this.checkInDateTime = checkInDateTime;
     }
 
-    public long getCheckOutDateTime() {
+    public String getCheckOutDateTime() {
         return checkOutDateTime;
     }
 
-    public void setCheckOutDateTime(long checkOutDateTime) {
-        this.checkOutDateTime = checkOutDateTime;
-    }
+
 
  
     

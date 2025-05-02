@@ -19,6 +19,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.text.JTextComponent;
 import net.proteanit.sql.DbUtils;
@@ -404,7 +405,8 @@ public class OrderPanel extends javax.swing.JDialog {
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
+                        //System.exit(0);
+                        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
                     }
                 });
                 dialog.setVisible(true);

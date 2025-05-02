@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 
@@ -664,7 +665,9 @@ public class RoomPanel extends javax.swing.JDialog {
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
+                        //System.exit(0);
+                        dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+
                     }
                 });
                 dialog.setVisible(true);

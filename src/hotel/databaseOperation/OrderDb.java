@@ -23,11 +23,22 @@ public class OrderDb {
 
     public void insertOrder(Order order) {
         try {
-            String insertOrder = "insert into orderItem('booking_id','item_food','price','quantity','total') values(" + order.getBookingId() + ",'" + order.getFoodItem() + "'," + order.getPrice() + "," + order.getQuantity() + "," + order.getTotal() + ")";
+            // String insertOrder = "insert into orderItem('booking_id','item_food','price','quantity','total') values(" + order.getBookingId() + ",'" + order.getFoodItem() + "'," + order.getPrice() + "," + order.getQuantity() + "," + order.getTotal() + ")";
+
+            // statement = conn.prepareStatement(insertOrder);
+            // System.out.println(">>>>>>>>>> " + insertOrder);
+            // statement.execute();
+            String insertOrder = "INSERT INTO orderItem(booking_id, item_food, price, quantity, total) VALUES (?, ?, ?, ?, ?)";
 
             statement = conn.prepareStatement(insertOrder);
-            System.out.println(">>>>>>>>>> " + insertOrder);
-            statement.execute();
+            statement.setInt(1, order.getBookingId());
+            statement.setString(2, order.getFoodItem());
+            statement.setDouble(3, order.getPrice());
+            statement.setInt(4, order.getQuantity());
+            statement.setDouble(5, order.getTotal());
+        
+            statement.executeUpdate();  // de préférence executeUpdate() pour les INSERT
+        
 
             JOptionPane.showMessageDialog(null, "successfully inserted a new Order");
 

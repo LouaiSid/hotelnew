@@ -24,13 +24,23 @@ public class ItemDb {
     
      public void insertItem(Item item) {
         try {
-            String insertItem = "insert into item('name','description','price') values('" + item.getItemName() + "','" + item.getDescription() + "'," + item.getPrice() + ")";
+            // String insertItem = "insert into item('name','description','price') values('" + item.getItemName() + "','" + item.getDescription() + "'," + item.getPrice() + ")";
+
+            // statement = conn.prepareStatement(insertItem);
+
+            // statement.execute();
+
+            // JOptionPane.showMessageDialog(null, "successfully inserted a new insertItem");
+
+            String insertItem = "INSERT INTO item(name, description, price) VALUES (?, ?, ?)";
 
             statement = conn.prepareStatement(insertItem);
+            statement.setString(1, item.getItemName());
+            statement.setString(2, item.getDescription());
+            statement.setDouble(3, item.getPrice());
+                    
+            statement.executeUpdate(); // utilisez executeUpdate pour les INSERT
 
-            statement.execute();
-
-            JOptionPane.showMessageDialog(null, "successfully inserted a new insertItem");
 
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.toString() + "\n" + "InsertQuery of insertItem Failed");
@@ -43,15 +53,24 @@ public class ItemDb {
 
     public void updateItem(Item item) {
         try {
-            String updateFood = "update food set name= '" + item.getItemName() + "', price= " + item.getPrice() + "description = '" + item.getDescription() + "' where item_id = " + item.getItemId();
+            // String updateFood = "update food set name= '" + item.getItemName() + "', price= " + item.getPrice() + "description = '" + item.getDescription() + "' where item_id = " + item.getItemId();
 
-            // System.out.println(">>>>>>>>>> "+ insertRoomTypeQuery);
+            // // System.out.println(">>>>>>>>>> "+ insertRoomTypeQuery);
+            // statement = conn.prepareStatement(updateFood);
+
+            // statement.execute();
+
+            // JOptionPane.showMessageDialog(null, "successfully updateitem ");
+
+            String updateFood = "UPDATE food SET name = ?, price = ?, description = ? WHERE item_id = ?";
+
             statement = conn.prepareStatement(updateFood);
+            statement.setString(1, item.getItemName());
+            statement.setDouble(2, item.getPrice());
+            statement.setString(3, item.getDescription());
+            statement.setInt(4, item.getItemId());
 
-            statement.execute();
-
-            JOptionPane.showMessageDialog(null, "successfully updateitem ");
-
+            statement.executeUpdate(); // utilisez executeUpdate pour UPDATE
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.toString() + "\n" + "Update Item failed");
         }
@@ -75,9 +94,15 @@ public class ItemDb {
 
     public void deleteItem(int itemId) {
         try {
-            String deleteQuery = "delete from item where item_id=" + itemId;
+            // String deleteQuery = "delete from item where item_id=" + itemId;
+            // statement = conn.prepareStatement(deleteQuery);
+            // statement.execute();
+            // JOptionPane.showMessageDialog(null, "Deleted item");
+
+            String deleteQuery = "DELETE FROM item WHERE item_id = ?";
             statement = conn.prepareStatement(deleteQuery);
-            statement.execute();
+            statement.setInt(1, itemId);  // protège contre l'injection SQL
+            statement.executeUpdate();    // utilise executeUpdate pour DELETE
             JOptionPane.showMessageDialog(null, "Deleted item");
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.toString() + "\n" + "Delete query Item Failed");

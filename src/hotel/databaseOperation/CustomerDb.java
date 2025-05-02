@@ -28,18 +28,31 @@ public class CustomerDb {
     }
       public void insertCustomer(UserInfo user)  {
         try {
-            String insertQuery = "insert into userInfo"
-                    + "('" + "name" + "'," + "'" + "address" + "','" + "phone" + "','" + "type" + "')"
-                    + " values('"
-                    + user.getName()
-                    + "','" + user.getAddress() + "'"
-                    + ",'" + user.getPhoneNo() + "'"
-                    + ",'" + user.getType() + "'"
-                    + ")";
+            // String insertQuery = "insert into userInfo"
+            //         + "('" + "name" + "'," + "'" + "address" + "','" + "phone" + "','" + "type" + "')"
+            //         + " values('"
+            //         + user.getName()
+            //         + "','" + user.getAddress() + "'"
+            //         + ",'" + user.getPhoneNo() + "'"
+            //         + ",'" + user.getType() + "'"
+            //         + ")";
 
-            statement = conn.prepareStatement(insertQuery);
+            // statement = conn.prepareStatement(insertQuery);
 
-            statement.execute();
+            // statement.execute();
+
+            String insertQuery = "INSERT INTO userInfo (name, address, phone, type) VALUES (?, ?, ?, ?)";
+
+            PreparedStatement statement = conn.prepareStatement(insertQuery);
+                    
+            // Remplacer les paramètres par les valeurs sécurisées
+            statement.setString(1, user.getName());
+            statement.setString(2, user.getAddress());
+            statement.setString(3, user.getPhoneNo());
+            statement.setString(4, user.getType());
+                    
+            statement.execute();  // Exécution sécurisée de la requête
+
 
             JOptionPane.showMessageDialog(null, "successfully inserted new Customer");
 
